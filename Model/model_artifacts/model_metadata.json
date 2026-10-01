@@ -1,0 +1,75 @@
+{
+    "model_name": "SVR - Next-Day Fatigue Score Predictor",
+    "algorithm": "Support Vector Regression (RBF Kernel)",
+    "target_variable": "next_day_fatigue_score",
+    "features_used": [
+        "age",
+        "gender",
+        "occupation_type",
+        "chronotype",
+        "bedtime_phone_minutes",
+        "primary_bedtime_app",
+        "screen_brightness_pct",
+        "blue_light_filter_active",
+        "caffeine_post_5pm_mg",
+        "physical_activity_min",
+        "sleep_latency_min",
+        "total_sleep_hours",
+        "deep_sleep_pct",
+        "rem_sleep_pct",
+        "morning_alarm_snoozes"
+    ],
+    "training_samples": 6728,
+    "test_samples": 1683,
+    "hyperparameters": {
+        "C": 4.989305,
+        "epsilon": 0.041146,
+        "gamma": 0.017112,
+        "kernel": "rbf"
+    },
+    "optimization": {
+        "method": "Optuna TPE Sampler",
+        "n_trials": 50,
+        "cv_folds": 5
+    },
+    "test_set_metrics": {
+        "RMSE": 0.5863,
+        "MAE": 0.4366,
+        "R2": 0.9505
+    },
+    "cross_val_metrics": {
+        "cv_folds": 10,
+        "RMSE_mean": 0.5712,
+        "RMSE_std": 0.0116,
+        "MAE_mean": 0.4279,
+        "MAE_std": 0.0097,
+        "R2_mean": 0.9541,
+        "R2_std": 0.0034
+    },
+    "preprocessing": {
+        "numerical_features": [
+            "age",
+            "bedtime_phone_minutes",
+            "screen_brightness_pct",
+            "blue_light_filter_active",
+            "caffeine_post_5pm_mg",
+            "physical_activity_min",
+            "sleep_latency_min",
+            "total_sleep_hours",
+            "deep_sleep_pct",
+            "rem_sleep_pct",
+            "morning_alarm_snoozes"
+        ],
+        "ordinal_features": [
+            "chronotype"
+        ],
+        "nominal_features": [
+            "gender",
+            "occupation_type",
+            "primary_bedtime_app"
+        ],
+        "scaler": "StandardScaler",
+        "encoder": "OrdinalEncoder"
+    },
+    "model_path": "model_artifacts\\svr_fatigue_model.pkl"
+}
